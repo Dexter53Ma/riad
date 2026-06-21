@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 
@@ -263,16 +264,24 @@ export default function BookingWidget() {
                     </p>
                   </div>
                 </button>
+                <AnimatePresence>
                 {desktopOpenCheckin && (
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-[60] w-[300px]">
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-[60] w-[300px]"
+                  >
                     <CalendarPanel
                       selectedDate={checkIn}
                       onSelect={(d) => { setCheckIn(d); setError(""); setDesktopOpenCheckin(false); }}
                       label="Check-in"
                       minDate={new Date()}
                     />
-                  </div>
+                  </motion.div>
                 )}
+                </AnimatePresence>
               </div>
 
               <div className="w-px h-8 bg-[#2a3936]/10 shrink-0" />
@@ -293,16 +302,24 @@ export default function BookingWidget() {
                     </p>
                   </div>
                 </button>
+                <AnimatePresence>
                 {desktopOpenCheckout && (
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-[60] w-[300px]">
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-[60] w-[300px]"
+                  >
                     <CalendarPanel
                       selectedDate={checkOut}
                       onSelect={(d) => { setCheckOut(d); setError(""); setDesktopOpenCheckout(false); }}
                       label="Check-out"
                       minDate={checkIn || new Date()}
                     />
-                  </div>
+                  </motion.div>
                 )}
+                </AnimatePresence>
               </div>
 
               <div className="w-px h-8 bg-[#2a3936]/10 shrink-0" />
@@ -323,16 +340,24 @@ export default function BookingWidget() {
                     </p>
                   </div>
                 </button>
+                <AnimatePresence>
                 {desktopOpenGuests && (
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-[60] w-[260px]">
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-[60] w-[260px]"
+                  >
                     <div className="bg-white rounded-2xl p-4 shadow-[0_16px_48px_rgba(0,0,0,0.12)]">
                       <GuestsRow adults={adults} onChange={setAdults} />
                       <button onClick={() => setDesktopOpenGuests(false)} className="w-full mt-3 py-2.5 bg-[#4b6753] text-white text-[10px] font-semibold uppercase tracking-[0.15em] rounded-xl hover:bg-[#3d5645] transition-colors">
                         Done
                       </button>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
+                </AnimatePresence>
               </div>
             </div>
 
@@ -436,8 +461,15 @@ export default function BookingWidget() {
         </div>
 
         {/* Step panel — slides up above the bar */}
+        <AnimatePresence>
         {mobileStep !== "none" && (
-          <div className="pointer-events-auto bg-white border-t border-[#2a3936]/8 px-4 pt-3 pb-4 max-h-[60vh] overflow-y-auto" style={{ boxShadow: "0 -8px 32px rgba(0,0,0,0.08)" }}>
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", damping: 28, stiffness: 300 }}
+            className="pointer-events-auto bg-white border-t border-[#2a3936]/8 px-4 pt-3 pb-4 max-h-[60vh] overflow-y-auto" style={{ boxShadow: "0 -8px 32px rgba(0,0,0,0.08)" }}
+          >
             {/* Drag handle */}
             <div className="flex justify-center mb-2">
               <div className="w-8 h-1 rounded-full bg-[#2a3936]/10" />
@@ -476,8 +508,9 @@ export default function BookingWidget() {
                 </button>
               </div>
             )}
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
     </>
   );

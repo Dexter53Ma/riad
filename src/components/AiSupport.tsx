@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -123,34 +124,62 @@ export default function AiSupport() {
   return (
     <>
       {/* Toggle button */}
-      <button
+      <motion.button
         onClick={() => setIsOpen(!isOpen)}
+        whileTap={{ scale: 0.9 }}
         className={cn(
-          "fixed bottom-[88px] right-4 md:bottom-8 md:right-6 z-50 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-300 active:scale-90",
+          "fixed bottom-[88px] right-4 md:bottom-8 md:right-6 z-50 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-colors duration-300",
           isOpen
-            ? "bg-[#2a3936] text-white rotate-0"
+            ? "bg-[#2a3936] text-white"
             : "bg-[#4b6753] text-white"
         )}
         aria-label="AI Support"
       >
-        {isOpen ? (
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-            <path d="M6 18 18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg className="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-            <path d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm3.375.375a.375.375 0 1 0 0-.75.375.375 0 0 0 0 .75ZM12 2a3.75 3.75 0 0 0-3.75 3.75v.75c0 1.003.344 1.927.935 2.659l.077.094a.375.375 0 0 1-.084.629 8.25 8.25 0 0 0 5.766 0 .375.375 0 0 1-.084-.63l.077-.093A3.75 3.75 0 0 0 15.75 6.5v-.75A3.75 3.75 0 0 0 12 2ZM9.75 18.75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5Z" />
-          </svg>
-        )}
-      </button>
+        <AnimatePresence mode="wait">
+          {isOpen ? (
+            <motion.svg
+              key="close"
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path d="M6 18 18 6M6 6l12 12" />
+            </motion.svg>
+          ) : (
+            <motion.svg
+              key="chat"
+              initial={{ rotate: 90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: -90, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="w-5 h-5 md:w-6 md:h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm3.375.375a.375.375 0 1 0 0-.75.375.375 0 0 0 0 .75ZM12 2a3.75 3.75 0 0 0-3.75 3.75v.75c0 1.003.344 1.927.935 2.659l.077.094a.375.375 0 0 1-.084.629 8.25 8.25 0 0 0 5.766 0 .375.375 0 0 1-.084-.63l.077-.093A3.75 3.75 0 0 0 15.75 6.5v-.75A3.75 3.75 0 0 0 12 2ZM9.75 18.75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5Z" />
+            </motion.svg>
+          )}
+        </AnimatePresence>
+      </motion.button>
 
       {/* Chat panel */}
-      <div
-        className={cn(
-          "fixed bottom-[148px] right-4 md:bottom-24 md:right-6 z-50 w-[calc(100%-2rem)] max-w-sm transition-all duration-300 origin-bottom-right",
-          isOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"
-        )}
-      >
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: 16 }}
+            transition={{ type: "spring", damping: 24, stiffness: 300 }}
+            className="fixed bottom-[148px] right-4 md:bottom-24 md:right-6 z-50 w-[calc(100%-2rem)] max-w-sm origin-bottom-right"
+          >
         <div className="bg-white rounded-2xl shadow-[0_12px_48px_rgba(0,0,0,0.15)] border border-[#2a3936]/5 overflow-hidden flex flex-col max-h-[70vh]">
           {/* Header */}
           <div className="bg-[#4b6753] px-4 py-3 flex items-center gap-3">
@@ -227,7 +256,9 @@ export default function AiSupport() {
             </form>
           </div>
         </div>
-      </div>
+        </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

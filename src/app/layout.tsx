@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import BackToTop from "@/components/BackToTop";
 import AiSupport from "@/components/AiSupport";
+import ClientLayout from "@/components/ClientLayout";
 
 export const metadata: Metadata = {
   title: "Riad Les Trois Mages - Intimate Riad in the Heart of Marrakech",
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <ClientLayout>{children}</ClientLayout>
         <BackToTop />
         <AiSupport />
       </body>

@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface ScrollRevealProps {
@@ -12,36 +12,45 @@ interface ScrollRevealProps {
   delay?: number;
 }
 
+const variants = {
+  up: {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  },
+  left: {
+    hidden: { opacity: 0, x: -40 },
+    visible: { opacity: 1, x: 0 },
+  },
+  right: {
+    hidden: { opacity: 0, x: 40 },
+    visible: { opacity: 1, x: 0 },
+  },
+  scale: {
+    hidden: { opacity: 0, scale: 0.92 },
+    visible: { opacity: 1, scale: 1 },
+  },
+};
+
 export default function ScrollReveal({
   children,
   className,
   animation = "up",
-  stagger = false,
   delay = 0,
 }: ScrollRevealProps) {
-  const { ref, isVisible } = useScrollReveal();
-
-  const animClass =
-    animation === "left"
-      ? "reveal-left"
-      : animation === "right"
-      ? "reveal-right"
-      : animation === "scale"
-      ? "reveal-scale"
-      : "reveal";
-
   return (
-    <div
-      ref={ref}
-      className={cn(
-        animClass,
-        stagger && "reveal-stagger",
-        isVisible && "visible",
-        className
-      )}
-      style={{ transitionDelay: delay ? `${delay}ms` : undefined }}
+    <motion.div
+      className={cn(className)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "0px 0px -60px 0px" }}
+      variants={variants[animation]}
+      transition={{
+        duration: 0.6,
+        delay: delay / 1000,
+        ease: [0.16, 1, 0.3, 1],
+      }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

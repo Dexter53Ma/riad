@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import RoomsSection from "@/components/RoomsSection";
 import ContactSection from "@/components/ContactSection";
@@ -89,8 +90,13 @@ export default function GalleryPage() {
       </section>
 
       {/* Lightbox */}
+      <AnimatePresence>
       {lightboxIndex !== null && (
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
           onClick={closeLightbox}
         >
@@ -115,13 +121,24 @@ export default function GalleryPage() {
             className="relative max-w-5xl max-h-[85vh] w-full mx-16"
             onClick={(e) => e.stopPropagation()}
           >
-            <Image
-              src={galleryImages[lightboxIndex].src}
-              alt={galleryImages[lightboxIndex].alt}
-              width={1200}
-              height={800}
-              className="w-full h-full object-contain"
-            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={lightboxIndex}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="w-full h-full"
+              >
+                <Image
+                  src={galleryImages[lightboxIndex].src}
+                  alt={galleryImages[lightboxIndex].alt}
+                  width={1200}
+                  height={800}
+                  className="w-full h-full object-contain"
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Next */}
@@ -136,8 +153,9 @@ export default function GalleryPage() {
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-sm">
             {lightboxIndex + 1} / {galleryImages.length}
           </div>
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
 
       <RoomsSection />
       <ContactSection />

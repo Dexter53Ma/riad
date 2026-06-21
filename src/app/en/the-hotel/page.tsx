@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/Header";
 import BenefitsTicker from "@/components/BenefitsTicker";
 import BlogSection from "@/components/BlogSection";
@@ -290,14 +291,21 @@ export default function TheHotelPage() {
                     {openFaq === faq.id ? "−" : "+"}
                   </span>
                 </button>
-                <div
-                  className="overflow-hidden transition-all duration-300"
-                  style={{ maxHeight: openFaq === faq.id ? "200px" : "0" }}
-                >
-                  <p className="px-6 pb-4 text-sm text-[#2a3936]/60 leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
+                <AnimatePresence>
+                {openFaq === faq.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="px-6 pb-4 text-sm text-[#2a3936]/60 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </motion.div>
+                )}
+                </AnimatePresence>
               </div>
             ))}
           </div>
