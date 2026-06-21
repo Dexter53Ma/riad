@@ -126,7 +126,7 @@ export default function AiSupport() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "fixed bottom-20 right-4 md:bottom-8 md:right-6 z-50 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-300 active:scale-90",
+          "fixed bottom-[140px] right-4 md:bottom-8 md:right-6 z-50 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-300 active:scale-90",
           isOpen
             ? "bg-[#2a3936] text-white rotate-0"
             : "bg-[#4b6753] text-white"
@@ -147,7 +147,7 @@ export default function AiSupport() {
       {/* Chat panel */}
       <div
         className={cn(
-          "fixed bottom-36 right-4 md:bottom-24 md:right-6 z-50 w-[calc(100%-2rem)] max-w-sm transition-all duration-300 origin-bottom-right",
+          "fixed bottom-[200px] right-4 md:bottom-24 md:right-6 z-50 w-[calc(100%-2rem)] max-w-sm transition-all duration-300 origin-bottom-right",
           isOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"
         )}
       >
