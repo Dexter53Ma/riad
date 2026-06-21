@@ -51,9 +51,9 @@ export default function BlogSection() {
         </div>
 
         {/* Mobile carousel */}
-        <div className="md:hidden flex gap-3 overflow-x-auto hide-scrollbar pb-4 -mx-4 px-4">
+        <div className="md:hidden flex gap-3 overflow-x-auto hide-scrollbar pb-4 -mx-4 px-4 snap-x snap-mandatory">
           {blogPosts.map((post) => (
-            <a key={post.id} href={post.link} className="group block shrink-0 w-[220px] sm:w-[260px]">
+            <a key={post.id} href={post.link} className="group block shrink-0 w-[65vw] min-w-[200px] sm:w-[260px] snap-start">
               <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <Image
                   src={post.image}

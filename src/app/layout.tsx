@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import BackToTop from "@/components/BackToTop";
 import AiSupport from "@/components/AiSupport";
@@ -9,6 +9,14 @@ export const metadata: Metadata = {
   icons: {
     icon: "/seo/favicon.png",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: "#4b6753",
 };
 
 export default function RootLayout({

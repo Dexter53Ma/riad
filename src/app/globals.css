@@ -179,3 +179,23 @@ html {
 .safe-area-pb {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* ─── Mobile touch improvements ─── */
+@media (max-width: 768px) {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  button, a, input, label {
+    touch-action: manipulation;
+  }
+}
+
+/* ─── Smooth scroll snap on mobile carousels ─── */
+.snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-start {
+  scroll-snap-align: start;
+}

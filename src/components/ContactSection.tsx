@@ -19,7 +19,7 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
           {/* Map / Image */}
           <ScrollReveal animation="left" className="order-2 lg:order-1">
-            <div className="relative aspect-[4/5] md:aspect-[3/4] w-full overflow-hidden">
+            <div className="relative aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] w-full overflow-hidden">
               <Image
                 src="/images/DSC09167-HDR-scaled.jpg"
                 alt="Riad Les Trois Mages Location"

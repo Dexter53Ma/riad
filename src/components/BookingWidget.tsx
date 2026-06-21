@@ -341,7 +341,7 @@ export default function BookingWidget() {
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pointer-events-none">
         {/* Step panel — above the bar */}
         {mobileStep !== "none" && (
-          <div className="pointer-events-auto bg-[#f6f4f2] border-t border-[#2a3936]/10 px-4 py-4 max-h-[60vh] overflow-y-auto">
+          <div className="pointer-events-auto bg-[#f6f4f2] border-t border-[#2a3936]/10 px-4 py-4 max-h-[55vh] overflow-y-auto safe-area-pb">
             <div className="flex items-center justify-between mb-3">
               <button onClick={() => setMobileStep("none")} className="text-[#4b6753] text-xs font-medium">Cancel</button>
               <p className="text-sm font-medium text-[#2a3936]">

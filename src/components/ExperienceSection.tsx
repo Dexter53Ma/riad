@@ -37,7 +37,7 @@ export default function ExperienceSection() {
         </ScrollReveal>
 
         <ScrollReveal animation="scale">
-          <div className="relative max-w-lg sm:max-w-xl md:max-w-2xl mx-auto">
+          <div className="relative max-w-[85vw] sm:max-w-xl md:max-w-2xl mx-auto">
             <div className="relative aspect-[3/4] sm:aspect-[2/3] w-full overflow-hidden">
               <Image
                 src={experiences[currentSlide].image}

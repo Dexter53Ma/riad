@@ -27,7 +27,7 @@ export default function Footer() {
             />
           </a>
 
-          <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 sm:gap-x-5 md:gap-x-6 lg:gap-x-7">
+          <nav className="flex flex-wrap justify-center gap-x-3 gap-y-1.5 sm:gap-x-5 md:gap-x-6 lg:gap-x-7 max-w-md">
             {footerLinks.map((link) => (
               <a
                 key={link.href}
@@ -45,7 +45,7 @@ export default function Footer() {
             <p className="text-[10px] md:text-[11px] text-white/40 tracking-wider">
               © {new Date().getFullYear()} Riad Les Trois Mages. All rights reserved.
             </p>
-            <div className="flex justify-center gap-3 md:gap-4">
+            <div className="flex justify-center gap-3 md:gap-4 flex-wrap">
               <a href="/en/legal-terms" className="text-[9px] md:text-[10px] text-white/30 hover:text-white/60 transition-colors uppercase tracking-wider">
                 Legal Terms
               </a>

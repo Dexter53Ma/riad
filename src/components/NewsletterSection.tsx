@@ -38,12 +38,12 @@ export default function NewsletterSection() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
                 required
-                className="flex-1 px-4 md:px-5 py-3 md:py-3.5 border border-[#2a3936]/10 text-xs sm:text-sm focus:outline-none focus:border-[#4b6753] transition-colors bg-[#f6f4f2] rounded-md"
+                className="flex-1 px-4 md:px-5 py-3.5 md:py-3.5 border border-[#2a3936]/10 text-sm sm:text-sm focus:outline-none focus:border-[#4b6753] transition-colors bg-[#f6f4f2] rounded-md min-h-[44px]"
               />
               <button
                 type="submit"
                 disabled={isSubmitting || !accepted}
-                className="px-6 md:px-8 py-3 md:py-3.5 bg-[#4b6753] text-white text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.15em] hover:bg-[#3d5645] active:scale-[0.97] transition-all duration-200 disabled:opacity-50 rounded-md"
+                className="px-6 md:px-8 py-3.5 md:py-3.5 bg-[#4b6753] text-white text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.15em] hover:bg-[#3d5645] active:scale-[0.97] transition-all duration-200 disabled:opacity-50 rounded-md min-h-[44px]"
               >
                 {isSubmitting ? "Subscribing..." : "Subscribe"}
               </button>
@@ -54,9 +54,9 @@ export default function NewsletterSection() {
                 type="checkbox"
                 checked={accepted}
                 onChange={(e) => setAccepted(e.target.checked)}
-                className="mt-1 w-3.5 h-3.5 md:w-4 md:h-4 border-[#2a3936]/20 rounded text-[#4b6753] focus:ring-[#4b6753]"
+                className="mt-1 w-4 h-4 md:w-4 md:h-4 border-[#2a3936]/20 rounded text-[#4b6753] focus:ring-[#4b6753]"
               />
-              <span className="text-[10px] md:text-[11px] text-[#2a3936]/50 leading-relaxed">
+              <span className="text-[11px] md:text-[11px] text-[#2a3936]/50 leading-relaxed">
                 I have read and accept the{" "}
                 <a href="/en/legal-terms" className="underline hover:text-[#4b6753] transition-colors">
                   legal terms and conditions

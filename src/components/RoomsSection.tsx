@@ -61,6 +61,11 @@ export default function RoomsSection() {
             </button>
           </div>
         </ScrollReveal>
+
+        {/* Mobile swipe hint */}
+        <div className="md:hidden flex justify-center mb-4">
+          <span className="text-[9px] uppercase tracking-[0.2em] text-[#2a3936]/30 font-medium">Swipe to explore</span>
+        </div>
       </div>
 
       {/* Carousel - full width bleed */}
@@ -71,7 +76,7 @@ export default function RoomsSection() {
         {rooms.map((room) => (
           <div
             key={room.id}
-            className="flex-shrink-0 w-[180px] sm:w-[220px] md:w-[280px] lg:w-[320px] snap-start group"
+            className="flex-shrink-0 w-[42vw] min-w-[160px] sm:w-[220px] md:w-[280px] lg:w-[320px] snap-start group"
           >
             <a href={room.link} className="block">
               <div className="relative w-full aspect-[3/5] sm:aspect-[7/12] overflow-hidden">
