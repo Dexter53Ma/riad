@@ -59,23 +59,23 @@ function CalendarPanel({
   for (let i = 1; i <= daysInMonth; i++) days.push(i);
 
   return (
-    <div className="bg-white rounded-2xl p-4 w-full shadow-lg">
-      <p className="text-xs font-medium text-[#2a3936] mb-3 text-center">{label}</p>
-      <div className="flex items-center justify-between mb-3">
-        <button onClick={() => setViewDate(new Date(year, month - 1, 1))} className="p-1.5 hover:bg-[#f6f4f2] rounded-full transition-colors">
+    <div className="bg-[#f6f4f2] rounded-2xl p-4 w-full">
+      <p className="text-xs font-medium text-[#2a3936]/50 mb-3 text-center uppercase tracking-wider">{label}</p>
+      <div className="flex items-center justify-between mb-4">
+        <button onClick={() => setViewDate(new Date(year, month - 1, 1))} className="p-2 hover:bg-white rounded-full transition-colors">
           <ChevronLeftIcon className="w-4 h-4 text-[#2a3936]" />
         </button>
-        <p className="text-sm font-medium text-[#2a3936]">
+        <p className="text-sm font-semibold text-[#2a3936]">
           {MONTHS[month]} {year}
         </p>
-        <button onClick={() => setViewDate(new Date(year, month + 1, 1))} className="p-1.5 hover:bg-[#f6f4f2] rounded-full transition-colors">
+        <button onClick={() => setViewDate(new Date(year, month + 1, 1))} className="p-2 hover:bg-white rounded-full transition-colors">
           <ChevronRightIcon className="w-4 h-4 text-[#2a3936]" />
         </button>
       </div>
 
       <div className="grid grid-cols-7 gap-0.5 mb-1">
         {WEEKDAYS.map((day) => (
-          <div key={day} className="text-center text-[9px] text-[#2a3936]/40 uppercase tracking-wider py-1">
+          <div key={day} className="text-center text-[9px] text-[#2a3936]/30 uppercase tracking-wider py-1.5 font-medium">
             {day}
           </div>
         ))}
@@ -99,11 +99,11 @@ function CalendarPanel({
               disabled={isPast}
               onClick={() => onSelect(date)}
               className={cn(
-                "w-full aspect-square flex items-center justify-center text-[11px] rounded-lg transition-all duration-150",
-                isPast && "text-[#2a3936]/20 cursor-not-allowed",
-                !isPast && !isSelected && "text-[#2a3936] hover:bg-[#4b6753]/10",
-                isSelected && "bg-[#4b6753] text-white font-medium",
-                isToday && !isSelected && "ring-1 ring-[#4b6753]/30"
+                "w-full aspect-square flex items-center justify-center text-[12px] rounded-xl transition-all duration-150 font-medium",
+                isPast && "text-[#2a3936]/15 cursor-not-allowed",
+                !isPast && !isSelected && "text-[#2a3936] hover:bg-white active:scale-95",
+                isSelected && "bg-[#4b6753] text-white shadow-[0_2px_8px_rgba(75,103,83,0.3)]",
+                isToday && !isSelected && "ring-1 ring-[#4b6753]/25 text-[#4b6753] font-bold"
               )}
             >
               {day}
@@ -112,10 +112,10 @@ function CalendarPanel({
         })}
       </div>
 
-      <div className="flex gap-2 mt-3 pt-3 border-t border-[#2a3936]/5">
+      <div className="flex gap-2 mt-4 pt-3 border-t border-[#2a3936]/5">
         <button
           onClick={() => onSelect(new Date())}
-          className="flex-1 text-[10px] text-[#4b6753] font-medium uppercase tracking-wider py-1.5 hover:bg-[#4b6753]/5 rounded-lg transition-colors"
+          className="flex-1 text-[10px] text-[#4b6753] font-semibold uppercase tracking-wider py-2 hover:bg-white rounded-xl transition-colors"
         >
           Today
         </button>
@@ -125,7 +125,7 @@ function CalendarPanel({
             tomorrow.setDate(tomorrow.getDate() + 1);
             onSelect(tomorrow);
           }}
-          className="flex-1 text-[10px] text-[#4b6753] font-medium uppercase tracking-wider py-1.5 hover:bg-[#4b6753]/5 rounded-lg transition-colors"
+          className="flex-1 text-[10px] text-[#4b6753] font-semibold uppercase tracking-wider py-2 hover:bg-white rounded-xl transition-colors"
         >
           Tomorrow
         </button>
@@ -138,33 +138,33 @@ function CalendarPanel({
 
 function GuestsRow({ adults, onChange }: { adults: number; onChange: (n: number) => void }) {
   return (
-    <div className="flex items-center justify-between py-3">
+    <div className="flex items-center justify-between py-2">
       <div>
-        <p className="text-sm text-[#2a3936] font-medium">Adults</p>
-        <p className="text-[10px] text-[#2a3936]/40">18+ years</p>
+        <p className="text-[13px] text-[#2a3936] font-semibold">Adults</p>
+        <p className="text-[10px] text-[#2a3936]/40 mt-0.5">18+ years</p>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
         <button
           disabled={adults <= 1}
           onClick={() => onChange(Math.max(1, adults - 1))}
           className={cn(
-            "w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-200 text-lg leading-none",
+            "w-9 h-9 flex items-center justify-center rounded-full border-2 transition-all duration-200 text-lg leading-none font-medium",
             adults <= 1
-              ? "border-[#2a3936]/10 text-[#2a3936]/20 cursor-not-allowed"
-              : "border-[#2a3936]/20 text-[#2a3936] hover:border-[#4b6753] hover:text-[#4b6753] hover:bg-[#4b6753]/5"
+              ? "border-[#2a3936]/8 text-[#2a3936]/15 cursor-not-allowed"
+              : "border-[#2a3936]/15 text-[#2a3936] hover:border-[#4b6753] hover:text-[#4b6753] hover:bg-[#4b6753]/5 active:scale-90"
           )}
         >
           −
         </button>
-        <span className="w-6 text-center text-sm font-medium text-[#2a3936] tabular-nums">{adults}</span>
+        <span className="w-6 text-center text-[15px] font-bold text-[#2a3936] tabular-nums">{adults}</span>
         <button
           disabled={adults >= 4}
           onClick={() => onChange(Math.min(4, adults + 1))}
           className={cn(
-            "w-8 h-8 flex items-center justify-center rounded-full border transition-all duration-200 text-lg leading-none",
+            "w-9 h-9 flex items-center justify-center rounded-full border-2 transition-all duration-200 text-lg leading-none font-medium",
             adults >= 4
-              ? "border-[#2a3936]/10 text-[#2a3936]/20 cursor-not-allowed"
-              : "border-[#2a3936]/20 text-[#2a3936] hover:border-[#4b6753] hover:text-[#4b6753] hover:bg-[#4b6753]/5"
+              ? "border-[#2a3936]/8 text-[#2a3936]/15 cursor-not-allowed"
+              : "border-[#2a3936]/15 text-[#2a3936] hover:border-[#4b6753] hover:text-[#4b6753] hover:bg-[#4b6753]/5 active:scale-90"
           )}
         >
           +
@@ -199,6 +199,16 @@ export default function BookingWidget() {
     document.addEventListener("mousedown", handle);
     return () => document.removeEventListener("mousedown", handle);
   }, []);
+
+  // Hide AI support & back-to-top when mobile panel is open
+  useEffect(() => {
+    if (mobileStep !== "none") {
+      document.body.classList.add("booking-panel-open");
+    } else {
+      document.body.classList.remove("booking-panel-open");
+    }
+    return () => document.body.classList.remove("booking-panel-open");
+  }, [mobileStep]);
 
   const buildBookingUrl = () => {
     const base = "https://www.booking.com/searchresults.html";
@@ -338,16 +348,108 @@ export default function BookingWidget() {
       </div>
 
       {/* ═══════════════ MOBILE ═══════════════ */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pointer-events-none overflow-hidden">
-        {/* Step panel — above the bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pointer-events-none flex flex-col-reverse">
+        {/* Bottom bar — premium compact row */}
+        <div className="pointer-events-auto bg-white/95 backdrop-blur-2xl border-t border-[#2a3936]/5 px-3 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]" style={{ boxShadow: "0 -4px 24px rgba(0,0,0,0.06)" }}>
+          {error && (
+            <div className="mb-2 px-1">
+              <p className="text-[10px] text-red-500 font-medium">{error}</p>
+            </div>
+          )}
+
+          <div className="flex items-center gap-2">
+            {/* Check-in */}
+            <button
+              onClick={() => setMobileStep(mobileStep === "checkin" ? "none" : "checkin")}
+              className={cn(
+                "flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-200 text-left min-w-0",
+                mobileStep === "checkin"
+                  ? "bg-[#4b6753]/8 ring-1 ring-[#4b6753]/20"
+                  : "bg-[#f6f4f2] hover:bg-[#ede9e5]"
+              )}
+            >
+              <svg className="w-3.5 h-3.5 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+              </svg>
+              <div className="min-w-0">
+                <p className="text-[8px] text-[#4b6753]/60 uppercase tracking-[0.08em] font-medium leading-none">Check in</p>
+                <p className="text-[11px] font-semibold text-[#2a3936] truncate leading-tight mt-0.5">
+                  {checkIn ? formatDate(checkIn) : "Select"}
+                </p>
+              </div>
+            </button>
+
+            {/* Divider */}
+            <div className="w-px h-7 bg-[#2a3936]/8 shrink-0" />
+
+            {/* Check-out */}
+            <button
+              onClick={() => setMobileStep(mobileStep === "checkout" ? "none" : "checkout")}
+              className={cn(
+                "flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-200 text-left min-w-0",
+                mobileStep === "checkout"
+                  ? "bg-[#4b6753]/8 ring-1 ring-[#4b6753]/20"
+                  : "bg-[#f6f4f2] hover:bg-[#ede9e5]"
+              )}
+            >
+              <svg className="w-3.5 h-3.5 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+              </svg>
+              <div className="min-w-0">
+                <p className="text-[8px] text-[#4b6753]/60 uppercase tracking-[0.08em] font-medium leading-none">Check out</p>
+                <p className="text-[11px] font-semibold text-[#2a3936] truncate leading-tight mt-0.5">
+                  {checkOut ? formatDate(checkOut) : "Select"}
+                </p>
+              </div>
+            </button>
+
+            {/* Divider */}
+            <div className="w-px h-7 bg-[#2a3936]/8 shrink-0" />
+
+            {/* Guests */}
+            <button
+              onClick={() => setMobileStep(mobileStep === "guests" ? "none" : "guests")}
+              className={cn(
+                "flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-200 text-left shrink-0",
+                mobileStep === "guests"
+                  ? "bg-[#4b6753]/8 ring-1 ring-[#4b6753]/20"
+                  : "bg-[#f6f4f2] hover:bg-[#ede9e5]"
+              )}
+            >
+              <svg className="w-3.5 h-3.5 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                <path d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+              </svg>
+              <div className="min-w-0">
+                <p className="text-[8px] text-[#4b6753]/60 uppercase tracking-[0.08em] font-medium leading-none">Guests</p>
+                <p className="text-[11px] font-semibold text-[#2a3936] leading-tight mt-0.5">{adults}</p>
+              </div>
+            </button>
+
+            {/* CTA button */}
+            <button
+              onClick={handleBook}
+              className="shrink-0 px-4 py-2.5 bg-[#4b6753] text-white text-[10px] font-bold uppercase tracking-[0.12em] hover:bg-[#3d5645] active:scale-[0.97] transition-all duration-200 rounded-xl whitespace-nowrap shadow-[0_2px_8px_rgba(75,103,83,0.25)]"
+            >
+              {nightCount > 0 ? `${nightCount}N · BOOK` : "BOOK"}
+            </button>
+          </div>
+        </div>
+
+        {/* Step panel — slides up above the bar */}
         {mobileStep !== "none" && (
-          <div className="pointer-events-auto bg-[#f6f4f2] border-t border-[#2a3936]/10 px-3 py-3 max-h-[50vh] overflow-y-auto safe-area-pb">
-            <div className="flex items-center justify-between mb-3">
-              <button onClick={() => setMobileStep("none")} className="text-[#4b6753] text-xs font-medium">Cancel</button>
-              <p className="text-sm font-medium text-[#2a3936]">
+          <div className="pointer-events-auto bg-white border-t border-[#2a3936]/8 px-4 pt-3 pb-4 max-h-[60vh] overflow-y-auto" style={{ boxShadow: "0 -8px 32px rgba(0,0,0,0.08)" }}>
+            {/* Drag handle */}
+            <div className="flex justify-center mb-2">
+              <div className="w-8 h-1 rounded-full bg-[#2a3936]/10" />
+            </div>
+            <div className="flex items-center justify-between mb-4">
+              <button onClick={() => setMobileStep("none")} className="text-[#4b6753] text-[13px] font-medium py-1">
+                Cancel
+              </button>
+              <p className="text-[15px] font-semibold text-[#2a3936]">
                 {mobileStep === "checkin" ? "Check-in" : mobileStep === "checkout" ? "Check-out" : "Guests"}
               </p>
-              <div className="w-12" />
+              <div className="w-14" />
             </div>
 
             {mobileStep === "checkin" && (
@@ -367,81 +469,15 @@ export default function BookingWidget() {
               />
             )}
             {mobileStep === "guests" && (
-              <div className="bg-white rounded-2xl p-3 shadow-lg">
+              <div className="bg-[#f6f4f2] rounded-2xl p-4">
                 <GuestsRow adults={adults} onChange={setAdults} />
-                <button onClick={() => setMobileStep("none")} className="w-full mt-2 py-2 bg-[#4b6753] text-white text-[10px] font-semibold uppercase tracking-[0.15em] rounded-xl hover:bg-[#3d5645] transition-colors">
+                <button onClick={() => setMobileStep("none")} className="w-full mt-3 py-3 bg-[#4b6753] text-white text-[11px] font-semibold uppercase tracking-[0.15em] rounded-xl hover:bg-[#3d5645] active:scale-[0.98] transition-all duration-200">
                   Done
                 </button>
               </div>
             )}
           </div>
         )}
-
-        {/* Bottom bar — single compact row */}
-        <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border-t border-[#2a3936]/10 px-3 py-2 safe-area-pb">
-          {error && <p className="text-[9px] text-red-500 mb-1.5">{error}</p>}
-
-          <div className="flex items-center gap-1.5">
-            {/* Check-in */}
-            <button
-              onClick={() => setMobileStep(mobileStep === "checkin" ? "none" : "checkin")}
-              className={cn(
-                "flex-1 flex items-center gap-1.5 px-2 py-2 rounded-lg transition-colors text-left min-w-0",
-                mobileStep === "checkin" ? "bg-[#4b6753]/10 ring-1 ring-[#4b6753]/30" : "bg-[#f6f4f2]"
-              )}
-            >
-              <svg className="w-3 h-3 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-              </svg>
-              <div className="min-w-0">
-                <p className="text-[7px] text-[#2a3936]/40 uppercase tracking-wider leading-none">In</p>
-                <p className="text-[10px] font-medium text-[#2a3936] truncate leading-tight mt-0.5">{checkIn ? formatDate(checkIn) : "—"}</p>
-              </div>
-            </button>
-
-            {/* Check-out */}
-            <button
-              onClick={() => setMobileStep(mobileStep === "checkout" ? "none" : "checkout")}
-              className={cn(
-                "flex-1 flex items-center gap-1.5 px-2 py-2 rounded-lg transition-colors text-left min-w-0",
-                mobileStep === "checkout" ? "bg-[#4b6753]/10 ring-1 ring-[#4b6753]/30" : "bg-[#f6f4f2]"
-              )}
-            >
-              <svg className="w-3 h-3 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-              </svg>
-              <div className="min-w-0">
-                <p className="text-[7px] text-[#2a3936]/40 uppercase tracking-wider leading-none">Out</p>
-                <p className="text-[10px] font-medium text-[#2a3936] truncate leading-tight mt-0.5">{checkOut ? formatDate(checkOut) : "—"}</p>
-              </div>
-            </button>
-
-            {/* Guests */}
-            <button
-              onClick={() => setMobileStep(mobileStep === "guests" ? "none" : "guests")}
-              className={cn(
-                "flex items-center gap-1.5 px-2 py-2 rounded-lg transition-colors text-left shrink-0",
-                mobileStep === "guests" ? "bg-[#4b6753]/10 ring-1 ring-[#4b6753]/30" : "bg-[#f6f4f2]"
-              )}
-            >
-              <svg className="w-3 h-3 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                <path d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-              </svg>
-              <div className="min-w-0">
-                <p className="text-[7px] text-[#2a3936]/40 uppercase tracking-wider leading-none">Guests</p>
-                <p className="text-[10px] font-medium text-[#2a3936] leading-tight mt-0.5">{adults}</p>
-              </div>
-            </button>
-
-            {/* CTA button */}
-            <button
-              onClick={handleBook}
-              className="shrink-0 px-3 py-2 bg-[#4b6753] text-white text-[9px] font-semibold uppercase tracking-[0.1em] hover:bg-[#3d5645] active:scale-[0.98] transition-all duration-200 rounded-lg whitespace-nowrap"
-            >
-              {nightCount > 0 ? `${nightCount}N · BOOK` : "BOOK"}
-            </button>
-          </div>
-        </div>
       </div>
     </>
   );

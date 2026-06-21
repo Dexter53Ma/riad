@@ -200,3 +200,15 @@ html {
 .snap-start {
   scroll-snap-align: start;
 }
+
+/* ─── Hide floating buttons when booking panel is open on mobile ─── */
+@media (max-width: 767px) {
+  body.booking-panel-open > button[aria-label="Back to top"],
+  body.booking-panel-open > button[aria-label="AI Support"],
+  body.booking-panel-open > div > button[aria-label="Back to top"],
+  body.booking-panel-open > div > button[aria-label="AI Support"] {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(16px) !important;
+  }
+}
