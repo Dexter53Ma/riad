@@ -338,10 +338,10 @@ export default function BookingWidget() {
       </div>
 
       {/* ═══════════════ MOBILE ═══════════════ */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pointer-events-none">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 pointer-events-none overflow-hidden">
         {/* Step panel — above the bar */}
         {mobileStep !== "none" && (
-          <div className="pointer-events-auto bg-[#f6f4f2] border-t border-[#2a3936]/10 px-4 py-4 max-h-[55vh] overflow-y-auto safe-area-pb">
+          <div className="pointer-events-auto bg-[#f6f4f2] border-t border-[#2a3936]/10 px-3 py-3 max-h-[50vh] overflow-y-auto safe-area-pb">
             <div className="flex items-center justify-between mb-3">
               <button onClick={() => setMobileStep("none")} className="text-[#4b6753] text-xs font-medium">Cancel</button>
               <p className="text-sm font-medium text-[#2a3936]">
@@ -367,9 +367,9 @@ export default function BookingWidget() {
               />
             )}
             {mobileStep === "guests" && (
-              <div className="bg-white rounded-2xl p-4 shadow-lg">
+              <div className="bg-white rounded-2xl p-3 shadow-lg">
                 <GuestsRow adults={adults} onChange={setAdults} />
-                <button onClick={() => setMobileStep("none")} className="w-full mt-3 py-2.5 bg-[#4b6753] text-white text-[10px] font-semibold uppercase tracking-[0.15em] rounded-xl hover:bg-[#3d5645] transition-colors">
+                <button onClick={() => setMobileStep("none")} className="w-full mt-2 py-2 bg-[#4b6753] text-white text-[10px] font-semibold uppercase tracking-[0.15em] rounded-xl hover:bg-[#3d5645] transition-colors">
                   Done
                 </button>
               </div>
@@ -377,66 +377,70 @@ export default function BookingWidget() {
           </div>
         )}
 
-        {/* Bottom bar */}
-        <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border-t border-[#2a3936]/10 px-4 py-3 safe-area-pb">
-          {error && <p className="text-[10px] text-red-500 mb-2">{error}</p>}
+        {/* Bottom bar — single compact row */}
+        <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border-t border-[#2a3936]/10 px-3 py-2 safe-area-pb">
+          {error && <p className="text-[9px] text-red-500 mb-1.5">{error}</p>}
 
-          <div className="flex gap-2 mb-2.5">
+          <div className="flex items-center gap-1.5">
+            {/* Check-in */}
             <button
               onClick={() => setMobileStep(mobileStep === "checkin" ? "none" : "checkin")}
               className={cn(
-                "flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl transition-colors text-left",
+                "flex-1 flex items-center gap-1.5 px-2 py-2 rounded-lg transition-colors text-left min-w-0",
                 mobileStep === "checkin" ? "bg-[#4b6753]/10 ring-1 ring-[#4b6753]/30" : "bg-[#f6f4f2]"
               )}
             >
-              <svg className="w-3.5 h-3.5 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+              <svg className="w-3 h-3 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
                 <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
               </svg>
               <div className="min-w-0">
-                <p className="text-[8px] text-[#2a3936]/40 uppercase tracking-wider">In</p>
-                <p className="text-[11px] font-medium text-[#2a3936] truncate">{checkIn ? formatDate(checkIn) : "—"}</p>
+                <p className="text-[7px] text-[#2a3936]/40 uppercase tracking-wider leading-none">In</p>
+                <p className="text-[10px] font-medium text-[#2a3936] truncate leading-tight mt-0.5">{checkIn ? formatDate(checkIn) : "—"}</p>
               </div>
             </button>
 
+            {/* Check-out */}
             <button
               onClick={() => setMobileStep(mobileStep === "checkout" ? "none" : "checkout")}
               className={cn(
-                "flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl transition-colors text-left",
+                "flex-1 flex items-center gap-1.5 px-2 py-2 rounded-lg transition-colors text-left min-w-0",
                 mobileStep === "checkout" ? "bg-[#4b6753]/10 ring-1 ring-[#4b6753]/30" : "bg-[#f6f4f2]"
               )}
             >
-              <svg className="w-3.5 h-3.5 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+              <svg className="w-3 h-3 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
                 <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
               </svg>
               <div className="min-w-0">
-                <p className="text-[8px] text-[#2a3936]/40 uppercase tracking-wider">Out</p>
-                <p className="text-[11px] font-medium text-[#2a3936] truncate">{checkOut ? formatDate(checkOut) : "—"}</p>
+                <p className="text-[7px] text-[#2a3936]/40 uppercase tracking-wider leading-none">Out</p>
+                <p className="text-[10px] font-medium text-[#2a3936] truncate leading-tight mt-0.5">{checkOut ? formatDate(checkOut) : "—"}</p>
               </div>
             </button>
 
+            {/* Guests */}
             <button
               onClick={() => setMobileStep(mobileStep === "guests" ? "none" : "guests")}
               className={cn(
-                "flex items-center gap-2 px-3 py-2.5 rounded-xl transition-colors text-left",
+                "flex items-center gap-1.5 px-2 py-2 rounded-lg transition-colors text-left shrink-0",
                 mobileStep === "guests" ? "bg-[#4b6753]/10 ring-1 ring-[#4b6753]/30" : "bg-[#f6f4f2]"
               )}
             >
-              <svg className="w-3.5 h-3.5 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+              <svg className="w-3 h-3 text-[#4b6753] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
                 <path d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
               </svg>
               <div className="min-w-0">
-                <p className="text-[8px] text-[#2a3936]/40 uppercase tracking-wider">Guests</p>
-                <p className="text-[11px] font-medium text-[#2a3936]">{adults}</p>
+                <p className="text-[7px] text-[#2a3936]/40 uppercase tracking-wider leading-none">Guests</p>
+                <p className="text-[10px] font-medium text-[#2a3936] leading-tight mt-0.5">{adults}</p>
               </div>
             </button>
-          </div>
 
-          <button
-            onClick={handleBook}
-            className="w-full py-3 bg-[#4b6753] text-white text-[11px] font-semibold uppercase tracking-[0.15em] hover:bg-[#3d5645] active:scale-[0.98] transition-all duration-200 rounded-xl"
-          >
-            {nightCount > 0 ? `CHECK AVAILABILITY · ${nightCount} NIGHT${nightCount !== 1 ? "S" : ""}` : "CHECK AVAILABILITY"}
-          </button>
+            {/* CTA button */}
+            <button
+              onClick={handleBook}
+              className="shrink-0 px-3 py-2 bg-[#4b6753] text-white text-[9px] font-semibold uppercase tracking-[0.1em] hover:bg-[#3d5645] active:scale-[0.98] transition-all duration-200 rounded-lg whitespace-nowrap"
+            >
+              {nightCount > 0 ? `${nightCount}N · BOOK` : "BOOK"}
+            </button>
+          </div>
         </div>
       </div>
     </>
