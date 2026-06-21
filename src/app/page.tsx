@@ -13,7 +13,7 @@ import BookingWidget from "@/components/BookingWidget";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#f6f4f2] pb-24 md:pb-0">
+    <main className="min-h-screen bg-[#f6f4f2] pb-24 md:pb-0 overflow-x-hidden">
       <Header />
       <HeroSection />
       <BenefitsTicker />
