@@ -173,6 +173,7 @@ select {
 /* ─── Smooth page scroll ─── */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* ─── Safe area padding (mobile notches) ─── */
