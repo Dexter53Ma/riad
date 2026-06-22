@@ -20,6 +20,7 @@ export default function RoomDetail({ room }: { room: Room }) {
             src={room.images[0].src}
             alt={room.images[0].alt}
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
@@ -52,7 +53,7 @@ export default function RoomDetail({ room }: { room: Room }) {
         <div className="hidden md:flex gap-2 p-4 bg-[#f6f4f2]">
           {room.images.map((img, i) => (
             <div key={i} className="relative w-24 h-16 lg:w-32 lg:h-20 overflow-hidden rounded-lg shrink-0">
-              <Image src={img.src} alt={img.alt} fill className="object-cover" />
+                    <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 50vw, 33vw" className="object-cover" />
             </div>
           ))}
         </div>
@@ -136,7 +137,7 @@ export default function RoomDetail({ room }: { room: Room }) {
               <div className="grid grid-cols-2 gap-2">
                 {room.images.map((img, i) => (
                   <div key={i} className="relative aspect-[4/3] overflow-hidden rounded-xl">
-                    <Image src={img.src} alt={img.alt} fill className="object-cover" />
+              <Image src={img.src} alt={img.alt} fill sizes="128px" className="object-cover" />
                   </div>
                 ))}
               </div>
@@ -246,6 +247,7 @@ export default function RoomDetail({ room }: { room: Room }) {
                         src={r.images[0].src}
                         alt={r.name}
                         fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />

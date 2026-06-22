@@ -1,8 +1,24 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Marrakech Travel Blog — Tips & Guides",
+  description:
+    "Tips, guides & stories from Marrakech. Discover the best day trips, cuisine, culture & experiences — from the team at Riad Les Trois Mages.",
+  alternates: {
+    canonical: "https://riadsestroismages.com/en/blog",
+  },
+  openGraph: {
+    title: "Marrakech Travel Blog — Riad Les Trois Mages",
+    description:
+      "Tips, guides & stories from Marrakech. Discover the best day trips, cuisine, culture & experiences.",
+    url: "https://riadsestroismages.com/en/blog",
+  },
+};
 
 const categories = [
   "All",
@@ -16,7 +32,7 @@ const categories = [
 
 const blogPosts = [
   {
-    slug: "san-sebastian-gastronomika-2025",
+    slug: "culinary-journey-marrakech-medina",
     category: "CUISINE",
     title: "The Flavors of Marrakech: A Culinary Journey Through the Medina",
     date: "22 September 2025",
@@ -25,7 +41,7 @@ const blogPosts = [
     image: "/images/DSC08741-scaled.jpg",
   },
   {
-    slug: "things-to-do-in-saint-jean-de-luz",
+    slug: "atlas-mountains-day-trip",
     category: "DAY TOUR",
     title: "Day Trip to the Atlas Mountains: Berber Villages and Mountain Views",
     date: "26 August 2025",
@@ -34,7 +50,7 @@ const blogPosts = [
     image: "/images/DSC08762-HDR-scaled.jpg",
   },
   {
-    slug: "4-san-sebastian-beaches",
+    slug: "hidden-gardens-marrakech",
     category: "MARRAKECH",
     title: "The Hidden Gardens of Marrakech: A Peaceful Escape from the Medina",
     date: "19 August 2025",
@@ -43,7 +59,7 @@ const blogPosts = [
     image: "/images/DSC08811-scaled.jpg",
   },
   {
-    slug: "somebody-feed-phil-san-sebastian",
+    slug: "moroccan-cooking-classes",
     category: "CUISINE",
     title: "Traditional Moroccan Cooking: Classes and Experiences Near Our Riad",
     date: "21 July 2025",
@@ -52,7 +68,7 @@ const blogPosts = [
     image: "/images/DSC08849-scaled.jpg",
   },
   {
-    slug: "what-to-see-in-zumaia-from-san-sebastian",
+    slug: "essaouira-coastal-day-trip",
     category: "DAY TOUR",
     title: "Essaouira: A Coastal Day Trip from Marrakech",
     date: "4 April 2025",
@@ -61,7 +77,7 @@ const blogPosts = [
     image: "/images/DSC08917-HDR-scaled.jpg",
   },
   {
-    slug: "things-to-do-in-san-sebastian-for-americans",
+    slug: "first-timers-guide-marrakech",
     category: "MARRAKECH",
     title: "First-Timer's Guide to Marrakech: What to Know Before You Go",
     date: "24 March 2025",
@@ -70,7 +86,7 @@ const blogPosts = [
     image: "/images/DSC08939-scaled.jpg",
   },
   {
-    slug: "exclusive-experiences-san-sebastian",
+    slug: "unique-experiences-marrakech",
     category: "EXPERIENCES",
     title: "Unique Experiences in Marrakech: From Hammam to Hot Air Balloon",
     date: "20 March 2025",
@@ -79,7 +95,7 @@ const blogPosts = [
     image: "/images/DSC08983-HDR-scaled.jpg",
   },
   {
-    slug: "basque-cultural-traditions-festivals-modern-art-san-sebastian",
+    slug: "moroccan-traditions-music-art-craft",
     category: "MOROCCAN CULTURE",
     title: "Moroccan Traditions: Music, Art and Craft in Marrakech",
     date: "9 March 2025",
@@ -88,16 +104,16 @@ const blogPosts = [
     image: "/images/DSC08997-scaled.jpg",
   },
   {
-    slug: "events-in-san-sebastian-2025",
+    slug: "festivals-events-marrakech-2026",
     category: "EXPERIENCES",
-    title: "Festivals and Events in Marrakech 2025: What's On During Your Stay",
+    title: "Festivals and Events in Marrakech 2026: What's On During Your Stay",
     date: "25 February 2025",
     excerpt:
       "Marrakech comes alive with festivals and events throughout the year. From the famous Marrakech Popular Arts Festival to international film and music events, there's always something happening.",
     image: "/images/DSC09061-scaled.jpg",
   },
   {
-    slug: "san-sebastian-travel-guide-where-to-stay",
+    slug: "why-stay-in-a-riad",
     category: "RIAD LIFE",
     title: "Why Staying in a Riad is the Best Way to Experience Marrakech",
     date: "22 February 2025",
@@ -232,7 +248,7 @@ export default function BlogPage() {
             Load more
           </button>
           <p className="mt-3 text-[10px] text-[#2a3936]/30">
-            Have you seen 10 of 60 publications
+            Showing {blogPosts.length} articles
           </p>
         </div>
       </section>
